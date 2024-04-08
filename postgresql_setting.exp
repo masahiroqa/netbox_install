@@ -1,0 +1,18 @@
+#!/usr/bin/expect
+
+set password root
+
+spawn /usr/pgsql-12/bin/initdb -E UTF8 --locale=C -A scram-sha-256 -W -D /var/lib/pgsql/12/data/
+
+expect {
+    -regexp ".*Enter new superuser password:.*" {
+        send "${password}\n"
+        exp_continue
+    }
+    -regexp ".*Enter it again:.*" {
+        send "${password}\n"
+        exp_continue
+    }
+}
+
+exit 0

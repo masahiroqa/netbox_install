@@ -1,0 +1,22 @@
+#!/usr/bin/expect
+
+set password root
+spawn python3 manage.py createsuperuser
+
+expect {
+    -regexp ".*Username.*" {
+        send "\n"
+        exp_continue
+    }
+    -regexp ".*Email address:.*" {
+        send "root@netbox-01.centlinux.com\n"
+        exp_continue
+    }
+    -regexp ".*Password.*" {
+        send "${password}\n"
+        exp_continue
+    }
+
+}
+
+exit 0

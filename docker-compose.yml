@@ -1,0 +1,10 @@
+services:
+  netbox-test:
+    container_name: netbox-test
+    build:
+        context: .
+        dockerfile: Dockerfile
+    privileged: true
+    command: /sbin/init
+    ports:
+      - "8000:8000"
